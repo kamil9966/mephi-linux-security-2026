@@ -1,0 +1,35 @@
+    1  groupadd students
+    2  useradd -m -u 1234 -g students user1
+    3  passwd user1
+    4  chage -M 90 user1
+    5  chmod 700 /home/user1
+    6  id user1
+    7  chage -l user1
+    8  find / -type f -perm -4000 > ~/setuid-files.out 2> ~/find-errors.out
+    9  ps -eo pid,ruid,euid,args | awk '$2>=1000 && $2<=60000 && $3==0' > ~/processes.out
+   10  cat ~/processes.out
+   11  echo test > /root/root-only.txt
+   12  chmod 600 /root/root-only.txt
+   13  cp /usr/bin/cat /home/user1/cat
+   14  chmod 4755 /home/user1/cat
+   15  su user1 -c "cat /root/root-only.txt"
+   16  su user1 -c "/home/user1/cat /root/root-only.txt"
+   17  cp /usr/bin/chown /home/user1/chown
+   18  chmod 755 /home/user1/chown
+   19  setcap cap_chown=ep /home/user1/chown
+   20  su user1 -c "touch /home/user1/test.txt"
+   21  su user1 -c "chown root /home/user1/test.txt"
+   22  su user1 -c "/home/user1/chown root /home/user1/test.txt"
+   23  ls -l /home/user1/test.txt
+   24  echo 'user1 ALL=(root) NOPASSWD: /usr/bin/date -s *' >> /etc/sudoers
+   25  visudo -c
+   26  su user1 -c "sudo date -s now"
+   27  stat /home/user1 > ~/stat.out
+   28  stat /home/user1/cat >> ~/stat.out
+   29  stat /home/user1/chown >> ~/stat.out
+   30  getcap /home/user1/chown > ~/getcap.out
+   31  cp /etc/passwd /etc/shadow /etc/group /etc/sudoers ~
+   32  history > ~/history.out
+   33  clear
+   34  echo M265240
+   35  history > ~/history.out

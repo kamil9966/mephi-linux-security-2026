@@ -1,0 +1,3 @@
+find: '/run/user/1000/doc': Permission denied
+find: '/proc/3795/task/3795/fdinfo/6': No such file or directory
+find: '/proc/3795/fdinfo/5': No such file or directory
